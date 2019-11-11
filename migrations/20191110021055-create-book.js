@@ -1,4 +1,6 @@
 'use strict';
+require('dotenv').config()
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Books', {

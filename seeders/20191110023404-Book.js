@@ -13,13 +13,16 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.bulkInsert(
+    "Books",
     [{
         id: 1,
         title: 'Heavy',
         author: 'Kiese Laymon',
         dateFinished: '2019-01-21',
         pages: 256,
-        rating: 5
+        rating: 5,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         id: 2,
@@ -27,7 +30,9 @@ module.exports = {
         author: 'Trent Dalton',
         dateFinished: '2019-04-27',
         pages: 464,
-        rating: 5
+        rating: 5,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         id: 3,
@@ -35,7 +40,9 @@ module.exports = {
         author: 'Peter Hessler',
         dateFinished: '2019-05-22',
         pages: 480,
-        rating: 5
+        rating: 5,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         id: 4,
@@ -43,7 +50,9 @@ module.exports = {
         author: 'Grace Talusan',
         dateFinished: '2019-07-17',
         pages: 256,
-        rating: 5
+        rating: 5,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         id: 6,
@@ -51,7 +60,9 @@ module.exports = {
         author: 'Lisa Jobs',
         dateFinished: '2018-11-18',
         pages: 383,
-        rating: 4
+        rating: 4,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         id: 7,
@@ -59,7 +70,9 @@ module.exports = {
         author: 'Sam Anderson',
         dateFinished: '2018-09-22',
         pages: 448,
-        rating: 5
+        rating: 5,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         id: 8,
@@ -67,7 +80,9 @@ module.exports = {
         author: 'Olga Tokarczuk',
         dateFinished: '2018-10-18',
         pages: 403,
-        rating: 3
+        rating: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         id: 9,
@@ -75,7 +90,9 @@ module.exports = {
         author: 'John Boyne',
         dateFinished: '2019-08-18',
         pages: 582,
-        rating: 5
+        rating: 5,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         id: 10,
@@ -83,21 +100,15 @@ module.exports = {
         author: 'Rebecca Mekkai',
         dateFinished: '2019-01-01',
         pages: 421,
-        rating: 3
+        rating: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ]
   ),
 
-
-
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
+   return queryInterface.bulkInsert('Books', null, {})
   }
 };
 
