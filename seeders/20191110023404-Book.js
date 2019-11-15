@@ -55,6 +55,16 @@ module.exports = {
         updatedAt: new Date()
       },
       {
+        id: 5,
+        title: 'Daisy Jones & The Six',
+        author: 'Taylor Jenkins Reed',
+        dateFinished: '2019-11-06',
+        pages: 350,
+        rating: 4,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
         id: 6,
         title: 'Small Fry',
         author: 'Lisa Jobs',
