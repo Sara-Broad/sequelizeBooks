@@ -1,16 +1,3 @@
-'use strict';
-
-/*
-     Add altering commands here.
-     Return a promise to correctly handle asynchronicity.
-
-     Example:
-     return queryInterface.bulkInsert('People', [{
-       name: 'John Doe',
-       isBetaMember: false
-     }], {});
-   */
-
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.bulkInsert(
     "Books",
@@ -121,23 +108,3 @@ module.exports = {
    return queryInterface.bulkInsert('Books', null, {})
   }
 };
-
-
-// up: (queryInterface, Sequelize) => queryInterface.bulkInsert(
-//   'Users',
-//   [
-//     {
-//       name: 'Jane Doe',
-//       email: 'janedoe@example.com',
-//       createdAt: new Date(),
-//       updatedAt: new Date(),
-//     },
-//     {
-//       name: 'Jon Doe',
-//       email: 'jondoe@example.com',
-//       createdAt: new Date(),
-//       updatedAt: new Date(),
-//     },
-//   ],
-//   {},
-// ),

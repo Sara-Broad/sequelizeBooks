@@ -1,16 +1,9 @@
-'use strict';
-
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.addColumn('Books', 'bookType', {
-      type: Sequelize.STRING,
-      allowNull: false
-    })
+  up: function (queryInterface, Type) {
+     return queryInterface.addColumn('Books', 'bookType', { type: Type.STRING, allowNull: true })
   },
 
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.removeColumn('Books', 'bookType', {
-      type: Sequelize.STRING
-    })
+  down: function (queryInterface, Type) {
+    return queryInterface.removeColumn('Books', 'bookType', { type: Type.STRING })
   }
-};
+}

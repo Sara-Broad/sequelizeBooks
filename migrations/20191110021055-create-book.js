@@ -1,40 +1,45 @@
-'use strict';
-require('dotenv').config()
-
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: (queryInterface, Type) => {
     return queryInterface.createTable('Books', {
       id: {
+        type: Type.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
       },
       title: {
-        type: Sequelize.STRING
+        type: Type.STRING,
+        allowNull: false
       },
       author: {
-        type: Sequelize.STRING
+        type: Type.STRING,
+        allowNull: false
       },
       dateFinished: {
-        type: Sequelize.DATE
+        type: Type.DATE,
+        allowNull: false
       },
       pages: {
-        type: Sequelize.INTEGER
+        type: Type.INTEGER,
+        allowNull: false
       },
       rating: {
-        type: Sequelize.INTEGER
+        type: Type.INTEGER,
+        allowNull: false
       },
+      // bookType: {
+      //   type: Type.STRING,
+      //   allowNull: false
+      // },
       createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        type: Type.DATE
       },
       updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Type.DATE
+      },
     });
   },
+
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Books');
   }

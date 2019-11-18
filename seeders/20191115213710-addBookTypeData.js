@@ -1,60 +1,58 @@
-const { Books } = require('../models/book')
+const { Book } = require('../models')
 
 module.exports = {
-  // up: (queryInterface, Sequelize) => {
-
-  // },
-
   up: async function () {
-    return Promise.all(bookTypeAdditions.map(({ id, bookType}) => 
-      Books.update({})
+    return Promise.all(bookTypeAdditions.map(({ title, bookType }) => 
+      Book.update({ bookType }, { where: { title }, fields: ['bookType'] })
     ))
   },
 
-  down: (queryInterface, Sequelize) => {
- 
+  down: async function () {
+    return Promise.all(bookTypeAdditions.map(({ title }) => 
+      Book.destory({ bookType: null }, { where: { title }, fields: ['bookType'] })
+    ))
   }
 };
 
 const bookTypeAdditions = [
   {
-    id: 1,
+    title: 'Heavy',
     bookType: 'nonfiction'
   },
   {
-    id: 2,
+    title: 'Boy Swallows Universe',
     bookType: 'fiction'
   },
   {
-    id: 3,
+    title: 'The Buried',
     bookType: 'nonfiction'
   },
   {
-    id: 4,
+    title: 'The Body Papers',
     bookType: 'nonfiction'
   },
   {
-    id: 5,
+    title: 'Daisy Jones & The Six',
     bookType: 'fiction'
   },
   {
-    id: 6,
+    title: 'Small Fry',
     bookType: 'nonfiction'
   },
   {
-    id: 7,
+    title: 'Boom Town',
     bookType: 'nonfiction'
   },
   {
-    id: 8,
+    title: 'Flights',
     bookType: 'fiction'
   },
   {
-    id: 9,
+    title: 'The Hearts Invisble Furies',
     bookType: 'fiction'
   },
   {
-    id: 10,
+    title: 'The Great Believers',
     bookType: 'fiction'
   }
 ]
