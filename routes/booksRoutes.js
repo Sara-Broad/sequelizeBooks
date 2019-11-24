@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const booksController = require('../controllers/booksController');
 
-router.route('/')
-    .get(booksController.getAllBooks)
+router.get('/books', booksController.getAllBooks)
 
 module.exports = router;

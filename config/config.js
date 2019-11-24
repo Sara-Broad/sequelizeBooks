@@ -4,6 +4,10 @@ module.exports = {
   development: {
     url: process.env.DEV_DATABASE_URL,
     dialect: 'postgres',
+    // dialectOptions: {
+    //   ssl: true
+    // },
+    seederStorage: 'sequelize'
   },
   // development: {
   //   username: process.env.POSTGRES_USER,
@@ -11,9 +15,9 @@ module.exports = {
   //   database: process.env.POSTGRES_DB,
   //   host: process.env.POSTGRES_HOST,
   //   dialect: 'postgres',
-  //   // dialectOptions: {
-  //   //   ssl: true
-  //   // },
+  //   dialectOptions: {
+  //     ssl: true
+  //   },
   //   seederStorage: 'sequelize'
   // },
   test: {
@@ -22,9 +26,9 @@ module.exports = {
     database: process.env.POSTGRES_DB,
     host: process.env.POSTGRES_HOST,
     dialect: 'postgres',
-    dialectOptions: {
-      ssl: true
-    },
+    // dialectOptions: {
+    //   ssl: true
+    // },
     seederStorage: 'sequelize'
   },
   production: {
@@ -33,9 +37,9 @@ module.exports = {
     database: process.env.POSTGRES_DB,
     host: process.env.POSTGRES_HOST,
     dialect: 'postgres',
-    dialectOptions: {
-      ssl: true
-    },
+    // dialectOptions: {
+    //   ssl: true
+    // },
     seederStorage: 'sequelize'
   }
 }
