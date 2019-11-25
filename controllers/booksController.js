@@ -32,7 +32,14 @@ const booksController = {
                     id: bookId
                 }
             }).then(function (book) {
-                res.json(book)
+                // 
+                if (!book) {
+                    return res.status(404).json({
+                        message: 'book not found'
+                    })
+                } else {
+                    res.status(200).json(book)
+                }
             })
             .catch(err => {
                 res.status(500).sendStatus('DATABASE ERROR: ' + err.message)
@@ -63,7 +70,13 @@ const booksController = {
                     id: bookId
                 }
             }).then(function (book) {
-                res.json(book)
+                if (!book) {
+                    return res.status(404).json({
+                        message: 'book not found'
+                    })
+                } else {
+                    res.status(200).json(book)
+                }
             })
             .catch(err => {
                 res.status(500).sendStatus('DATABASE ERROR: ' + err.message)
