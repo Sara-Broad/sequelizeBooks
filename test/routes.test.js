@@ -1,18 +1,18 @@
 require('dotenv').config()
 process.env.NODE_ENV = "test"
 const test = require('tape')
-// const app = require('../server')
+const apps = require('../server')
 const modulePath = '../server'
 const db = require('../models')
 const Promise = require('promise');
-var proxyquire = require('proxyquire').noCallThru()
-var assert = require('assert');
-const Book = require('../models/book')
+// var proxyquire = require('proxyquire').noCallThru()
+var proxyquire = require('proxyquire')
+
 // const {
 //     getBookById,
 //     getAllBooks
 // } = require('../controllers/booksController')
-// const controllers = require('../controllers/booksController')
+const booksController = require('../controllers/booksController')
 const sinon = require('sinon');
 var httpMocks = require('node-mocks-http');
 
@@ -21,64 +21,64 @@ const express = require('express');
 
 const app = express();
 
-// test('get books by id', function (assert) {
-//     const bookMock = {
-//         id: 10,
-//         title: 'The Believers',
-//         author: 'Rebecca Mekkai', 
-//         dateFinished: '01-01-2019',
-//         pages: 350,
-//         rating: 5,
-//         bookType: 'fiction'
-//     }
-// })
+const bookMock = {
+    id: 10,
+    title: 'The Believers',
+    author: 'Rebecca Mekkai',
+    dateFinished: '01-01-2019',
+    pages: 350,
+    rating: 5,
+    bookType: 'fiction'
+}
 
-const getBookById = app.get('/books/:id', function (req, res) {
-    const bookId = req.params.id
-    db.Book.findOne({
-            where: {
-                id: bookId
-            }
-        }).then(function (book) {
-            if (!book) {
-                return res.status(404).json({
-                    message: 'book not found'
-                })
-            } else {
-                res.status(200).json(book)
-            }
-        })
-        .catch(err => {
-            res.status(500).sendStatus('DATABASE ERROR: ' + err.message)
-        })
-})
+const bookModel = {
+    Book: {}
+}
 
 
-test.only('get book by id', function (test) {
-    const mockRequest = httpMocks.createRequest({
-        method: 'GET',
-        url: '/books/:id',
-        params: {
-            id: 10
-        }
-    });
+// test('get book by id', function (test) {
+//     const mockRequest = httpMocks.createRequest({
+//         method: 'GET',
+//         url: '/books/:id',
+//         params: {
+//             id: 10
+//         }
+//     });
 
-    const mockResponse = httpMocks.createResponse({
-        eventEmitter: require('events').EventEmitter
-    });
+//     const mockResponse = httpMocks.createResponse({
+//         eventEmitter: require('events').EventEmitter
+//     });
 
-    // console.log(mockResponse)
+//     console.log('mockRequest', mockRequest)
+//     console.log('mockResponse', mockResponse)
+//     test.doesNotThrow(function () {
+//         booksController.getBookById(mockRequest, mockResponse);
+//         // test.equal(bookMock, mockResponse)
+//         test.equal(mockResponse.statusCode, 200)
+//     });
+//     test.end();
+    // booksController.getBookById(mockRequest, mockResponse)
     // getBookById(mockRequest, mockResponse)
-    // const data = response._getJSONData();
+
+    // const data = mockResponse._getJSONData();
     // var data = mockResponse._getJSONData();
     // console.log(data)
     // var data = mockResponse._getJSONData();
     // console.log('data', data)
     // return getBookById(mockRequest, mockResponse).then((res) => {
-    //     test.equal(typeof res.message, 'string');
-    //     test.end()
+    //     // test.equal(typeof res.message, 'string');
+    //     // test.done()
+    //     console.log(res)
     // });
-});
+    // test.end()
+
+
+// });
+
+// test.only('get all books', function (test) {
+
+//     test.end()
+// })
 
 // test('booksController.getAllBooks returns the entire list of books', (assert) => {
 // test('get all books', function (assert) {
@@ -108,3 +108,35 @@ test.only('get book by id', function (test) {
 
 //     assert.end()
 // })
+
+test.only('get all books', function (test) {
+    const bookMock = {
+        id: 1,
+        title: 'Heavy',
+        author: 'Kiese Laymon',
+        dateFinished: '01-16-2019',
+        pages: 200,
+        rating: 5,
+        bookType: 'nonfiction'
+    }
+
+
+    const bookListMock = [{
+        get: () => bookMock
+    }]
+
+    const getAllMock = sinon.stub().returns(bookListMock)
+
+    const models = {
+        Book: {
+            getAllBooks: getAllMock
+        }
+    }
+
+    const func = proxyquire(booksController, { '../models': models})
+    const actual = func.getAllBooks()
+    // console.log(actual)
+    test.ok(getAllMock.calledWith(), 'find stuff')
+    test.end()
+
+})
