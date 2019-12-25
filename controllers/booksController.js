@@ -1,13 +1,13 @@
 const db = require('../models')
 
 const booksController = {
-    getAllBooks(req, res) {
-        db.Book.findAll({})
+    getAllBooks (req, res) {
+        return db.Book.findAll({})
             .then(function (books) {
-                res.json(books)
+               return res.json(books)
             })
             .catch(err => {
-                res.status(500).sendStatus('DATABASE ERROR: ' + err.message)
+                return res.status(500).sendStatus('DATABASE ERROR: ' + err.message)
             })
     },
     addBook(req, res) {
@@ -85,8 +85,3 @@ const booksController = {
 }
 
 module.exports = booksController
-
-
-
-
-

@@ -3,16 +3,16 @@ const bodyParser = require('body-parser');
 const PORT = 8000;
 const routes = require('./routes/booksRoutes')
 const db = require('./models')
-
 const app = express();
 
 
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+app.use(bodyParser.json());
 
-app.get('/', function (req, res, next) {
+
+app.get('/', function (err, req, res) {
   res.send('database connection')
 })
 
