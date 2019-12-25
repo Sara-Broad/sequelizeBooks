@@ -4,6 +4,7 @@ const booksController = {
     getAllBooks (req, res) {
         return db.Book.findAll({})
             .then(function (books) {
+            //    console.log(books)
                return res.json(books)
             })
             .catch(err => {
