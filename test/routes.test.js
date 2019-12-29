@@ -13,7 +13,7 @@ const httpMocks = require('node-mocks-http');
 
 
 
-// works but using Sinon
+// works but using Sinon methods
 // test('get all books resolves with a success message', (assert) => {
 //     const req = httpMocks.createRequest({
 //         method: 'GET',
@@ -68,7 +68,6 @@ test('get all books should return a list of movies', (assert) => {
     this.get = sinon.stub(request, 'get');
     this.get.yields(null, responseObject, JSON.stringify(bookMock))
     request.get('/books', (err, res, body) => {
-        // console.log(JSON.parse(body))
         body = JSON.parse(body);
         assert.equal(body.data.length, 2, 'there are two objects in the mock data')
         assert.strictEqual(body.status, 'success', 'expect a success message')
