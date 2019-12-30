@@ -129,3 +129,43 @@ test('Delete books is called and removes a book from the list', (assert) => {
         assert.end()
     })
 });
+
+test('Gets a book by the bookId', (assert) => {
+    const responseObject = {
+        statusCode: 200,
+        headers: {
+            'content-type': 'application/json'
+        },
+        data: [
+            {
+                id: 2,
+                title: 'Boy Swallows Universe',
+                author: 'Trent Dalton',
+                dateFinished: '2019-04-27',
+                pages: 464,
+                rating: 5,
+                createdAt: '2019-11-24T01:21:17.532Z',
+                updatedAt: '2019-11-24T01:21:17.532Z'
+            }
+        ]
+    };
+
+    const requestObject = {
+        status: 'success',
+        params: [
+            {
+                "id": 2
+            }
+        ]
+    }
+
+    // this.get = sinon.stub(request, 'get')
+    this.get.yields(null, responseObject, JSON.stringify(requestObject))
+    const bookId = requestObject.params[0].id
+
+    request.get(`/books/${bookId}`, (err, res, body) => {
+        assert.strictEqual(responseObject.statusCode, 200, 'response returns a 200 status code')
+        assert.equal(res.data[0].id, 2, `response object has the bookId: ${bookId}`)
+        assert.end()
+    })
+})
